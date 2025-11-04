@@ -58,7 +58,7 @@
     </style>
 </head>
 <body>
-    <h1>📋 Power Platform Bookmarklets</h1>
+    <h1>Power Platform Bookmarklets</h1>
     <p>Quick browser tools for Power Platform devs. Drag bookmarklets to your bookmarks bar.</p>
 
     <div class="manual-steps">
@@ -66,11 +66,11 @@
     </div>
 
     <div class="bookmarklet">
-        <h3>📊 Get Table Metadata</h3>
+        <h3>📋 Get Table Metadata</h3>
         <p>Extracts Dataverse table schema from a model-driven app view and copies it as a markdown table (perfect for pasting into Claude, Copilot, or ChatGPT).</p>
         
         <p><strong>Install:</strong> Drag this to your bookmarks bar →</p>
-        <a href="javascript:(function(){const e=new URLSearchParams(window.location.search).get('etn');if(!e)return alert('No entity in URL. Go to a table view first.');const t=window.location.origin+`/api/data/v9.2/EntityDefinitions(LogicalName='${e}')?$select=LogicalName&$expand=Attributes($select=LogicalName,DisplayName,AttributeType)`;fetch(t).then(r=>r.json()).then(d=>{const rows=d.Attributes.filter(a=>!a.LogicalName.match(/^(created|modified|owner|owning|statecode|statuscode|versionnumber|importsequencenumber|overriddencreatedon|timezoneruleversionnumber|utcconversiontimezonecode)/)).map(a=>`| ${a.LogicalName} | ${a.DisplayName?.LocalizedLabels?.[0]?.Label||''} | ${a.AttributeType} |`).join('\n');const table=`**Table: ${e}**\n\n| LogicalName | DisplayName | AttributeType |\n|-------------|-------------|---------------|\n${rows}`;navigator.clipboard.writeText(table).then(()=>alert(`✓ Schema copied!\n\n${d.Attributes.length} total, ${rows.split('\n').length} shown`))}).catch(err=>alert('Error: '+err.message))})();" class="drag-link">👆 Get Table Metadata</a>
+        <a href="javascript:(function(){const e=new URLSearchParams(window.location.search).get('etn');if(!e)return alert('No entity in URL. Go to a table view first.');const t=window.location.origin+`/api/data/v9.2/EntityDefinitions(LogicalName='${e}')?$select=LogicalName&$expand=Attributes($select=LogicalName,DisplayName,AttributeType)`;fetch(t).then(r=>r.json()).then(d=>{const rows=d.Attributes.filter(a=>!a.LogicalName.match(/^(created|modified|owner|owning|statecode|statuscode|versionnumber|importsequencenumber|overriddencreatedon|timezoneruleversionnumber|utcconversiontimezonecode)/)).map(a=>`| ${a.LogicalName} | ${a.DisplayName?.LocalizedLabels?.[0]?.Label||''} | ${a.AttributeType} |`).join('\n');const table=`**Table: ${e}**\n\n| LogicalName | DisplayName | AttributeType |\n|-------------|-------------|---------------|\n${rows}`;navigator.clipboard.writeText(table).then(()=>alert(`✓ Schema copied!\n\n${d.Attributes.length} total, ${rows.split('\n').length} shown`))}).catch(err=>alert('Error: '+err.message))})();" class="drag-link">Get Table Metadata</a>
 
         <details style="margin-top: 15px;">
             <summary><strong>Manual install (if drag doesn't work)</strong></summary>
