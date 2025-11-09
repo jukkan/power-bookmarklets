@@ -67,10 +67,12 @@
 
     <div class="bookmarklet">
         <h3>📋 Get Table Metadata</h3>
-        <p>Extracts Dataverse table schema from a model-driven app view and copies it as a markdown table (perfect for pasting into Claude, Copilot, or ChatGPT).</p>
+        <p>Extracts Dataverse table schema from a model-driven app view and copies it as a markdown table. Perfect for pasting into Claude, Copilot, or ChatGPT.</p>
+        
+        <p><strong>✨ New:</strong> Now includes choice/picklist values with their IDs and labels!</p>
         
         <p><strong>Install:</strong> Drag this to your bookmarks bar →</p>
-        <a href="javascript:(function(){const e=new URLSearchParams(window.location.search).get('etn');if(!e)return alert('No entity in URL. Go to a table view first.');const t=window.location.origin+`/api/data/v9.2/EntityDefinitions(LogicalName='${e}')?$select=LogicalName&$expand=Attributes($select=LogicalName,DisplayName,AttributeType)`;fetch(t).then(r=>r.json()).then(d=>{const rows=d.Attributes.filter(a=>!a.LogicalName.match(/^(created|modified|owner|owning|statecode|statuscode|versionnumber|importsequencenumber|overriddencreatedon|timezoneruleversionnumber|utcconversiontimezonecode)/)).map(a=>`| ${a.LogicalName} | ${a.DisplayName?.LocalizedLabels?.[0]?.Label||''} | ${a.AttributeType} |`).join('\n');const table=`**Table: ${e}**\n\n| LogicalName | DisplayName | AttributeType |\n|-------------|-------------|---------------|\n${rows}`;navigator.clipboard.writeText(table).then(()=>alert(`✓ Schema copied!\n\n${d.Attributes.length} total, ${rows.split('\n').length} shown`))}).catch(err=>alert('Error: '+err.message))})();" class="drag-link">Get Table Metadata</a>
+        <a href="javascript:(function(){const e=new URLSearchParams(window.location.search).get('etn');if(!e)return alert('No entity in URL. Go to a table view first.');const t=window.location.origin,n=`${t}/api/data/v9.2/EntityDefinitions(LogicalName='${e}')`,a=`${n}?$select=LogicalName&$expand=Attributes($select=LogicalName,DisplayName,AttributeType)`,o=`${n}/Attributes/Microsoft.Dynamics.CRM.PicklistAttributeMetadata?$select=LogicalName&$expand=OptionSet($select=Options)`;Promise.all([fetch(a).then(r=>r.json()),fetch(o).then(r=>r.json())]).then(([d,p])=>{const opts={};p.value.forEach(i=>{i.OptionSet?.Options&&(opts[i.LogicalName]=i.OptionSet.Options.map(o=>`${o.Value}: ${o.Label?.LocalizedLabels?.[0]?.Label||o.Value}`).join(', '))});const rows=d.Attributes.filter(a=>!a.LogicalName.match(/^(created|modified|owner|owning|statecode|statuscode|versionnumber|importsequencenumber|overriddencreatedon|timezoneruleversionnumber|utcconversiontimezonecode)/)).map(a=>{const name=a.DisplayName?.LocalizedLabels?.[0]?.Label||'',opt=opts[a.LogicalName]?` [${opts[a.LogicalName]}]`:'';return`| ${a.LogicalName} | ${name} | ${a.AttributeType}${opt} |`}).join('\n'),table=`**Table: ${e}**\n\n| LogicalName | DisplayName | AttributeType |\n|-------------|-------------|---------------|\n${rows}`;navigator.clipboard.writeText(table).then(()=>alert(`✓ Schema copied!\n\n${d.Attributes.length} total, ${rows.split('\n').length} shown\n${Object.keys(opts).length} choice fields`))}).catch(err=>alert('Error: '+err.message))})();" class="drag-link">Get Table Metadata</a>
 
         <details style="margin-top: 15px;">
             <summary><strong>Manual install (if drag doesn't work)</strong></summary>
@@ -79,7 +81,7 @@
                 <li>Name: <code>Get Table Metadata</code></li>
                 <li>URL: Copy the code below and paste it</li>
             </ol>
-            <pre style="font-size: 11px; max-height: 150px; overflow-y: auto;">javascript:(function(){const e=new URLSearchParams(window.location.search).get('etn');if(!e)return alert('No entity in URL. Go to a table view first.');const t=window.location.origin+`/api/data/v9.2/EntityDefinitions(LogicalName='${e}')?$select=LogicalName&$expand=Attributes($select=LogicalName,DisplayName,AttributeType)`;fetch(t).then(r=>r.json()).then(d=>{const rows=d.Attributes.filter(a=>!a.LogicalName.match(/^(created|modified|owner|owning|statecode|statuscode|versionnumber|importsequencenumber|overriddencreatedon|timezoneruleversionnumber|utcconversiontimezonecode)/)).map(a=>`| ${a.LogicalName} | ${a.DisplayName?.LocalizedLabels?.[0]?.Label||''} | ${a.AttributeType} |`).join('\n');const table=`**Table: ${e}**\n\n| LogicalName | DisplayName | AttributeType |\n|-------------|-------------|---------------|\n${rows}`;navigator.clipboard.writeText(table).then(()=>alert(`✓ Schema copied!\n\n${d.Attributes.length} total, ${rows.split('\n').length} shown`))}).catch(err=>alert('Error: '+err.message))})();</pre>
+            <pre style="font-size: 11px; max-height: 150px; overflow-y: auto;">javascript:(function(){const e=new URLSearchParams(window.location.search).get('etn');if(!e)return alert('No entity in URL. Go to a table view first.');const t=window.location.origin,n=`${t}/api/data/v9.2/EntityDefinitions(LogicalName='${e}')`,a=`${n}?$select=LogicalName&$expand=Attributes($select=LogicalName,DisplayName,AttributeType)`,o=`${n}/Attributes/Microsoft.Dynamics.CRM.PicklistAttributeMetadata?$select=LogicalName&$expand=OptionSet($select=Options)`;Promise.all([fetch(a).then(r=>r.json()),fetch(o).then(r=>r.json())]).then(([d,p])=>{const opts={};p.value.forEach(i=>{i.OptionSet?.Options&&(opts[i.LogicalName]=i.OptionSet.Options.map(o=>`${o.Value}: ${o.Label?.LocalizedLabels?.[0]?.Label||o.Value}`).join(', '))});const rows=d.Attributes.filter(a=>!a.LogicalName.match(/^(created|modified|owner|owning|statecode|statuscode|versionnumber|importsequencenumber|overriddencreatedon|timezoneruleversionnumber|utcconversiontimezonecode)/)).map(a=>{const name=a.DisplayName?.LocalizedLabels?.[0]?.Label||'',opt=opts[a.LogicalName]?` [${opts[a.LogicalName]}]`:'';return`| ${a.LogicalName} | ${name} | ${a.AttributeType}${opt} |`}).join('\n'),table=`**Table: ${e}**\n\n| LogicalName | DisplayName | AttributeType |\n|-------------|-------------|---------------|\n${rows}`;navigator.clipboard.writeText(table).then(()=>alert(`✓ Schema copied!\n\n${d.Attributes.length} total, ${rows.split('\n').length} shown\n${Object.keys(opts).length} choice fields`))}).catch(err=>alert('Error: '+err.message))})();</pre>
         </details>
 
         <details style="margin-top: 10px;">
@@ -87,8 +89,14 @@
             <ol>
                 <li>Navigate to a table view in a model-driven app</li>
                 <li>Click the bookmarklet</li>
-                <li>Schema is copied to clipboard (filters out system fields like <code>createdon</code>, <code>modifiedby</code>, etc.)</li>
+                <li>Schema is copied to clipboard</li>
             </ol>
+            <p><strong>What gets included:</strong></p>
+            <ul>
+                <li>All custom fields (filters out system fields like <code>createdon</code>, <code>modifiedby</code>, etc.)</li>
+                <li>Choice/picklist values with IDs and labels (e.g., <code>Picklist [1: Draft, 2: Active]</code>)</li>
+                <li>Works with any language (uses first available label from environment)</li>
+            </ul>
         </details>
 
         <p style="margin-top: 10px;">

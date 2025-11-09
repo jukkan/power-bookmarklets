@@ -26,6 +26,7 @@ Extracts Dataverse table schema from a model-driven app view and copies it as a 
 |-------------|-------------|---------------|
 | pre_name | Task Name | String |
 | pre_notes | Notes | Memo |
+| pre_stage | Stage | Picklist [1: Draft, 2: In Progress, 3: Complete] |
 | pre_actualdate | Actual Date | DateTime |
 | pre_year | Year | Integer |
 | pre_parentrecordid | Parent Record | Uniqueidentifier |
