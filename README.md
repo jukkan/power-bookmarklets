@@ -39,5 +39,11 @@ Extracts Dataverse table schema from a model-driven app view and copies it as a 
 - Uses Web API `v9.2` (works on most environments)
 - Copies to clipboard automatically
 
+**See it in action:**
+
+[![Watch demo video](https://img.youtube.com/vi/K_k0p8gnQIg/hqdefault.jpg)](https://www.youtube.com/watch?v=K_k0p8gnQIg "Copy Dataverse Table Metadata with 1-Click")
+
+*1-minute demo showing how to extract table schema and use it with AI tools*
+
 **Source:** [`bookmarklets/get-table-metadata.js`](bookmarklets/get-table-metadata.js)
 
