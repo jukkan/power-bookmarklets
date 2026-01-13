@@ -1,14 +1,19 @@
-# Power Platform Bookmarklets
+# Power Platform Bookmarklets & Tools
 
-Quick browser tools for Power Platform devs.
+Quick browser helpers for Power Platform admins, makers, and power users. The repo now hosts both classic bookmarklets and richer Tampermonkey userscripts so everything lives in one place.
 
-## 🛠️ How to install
+## What's inside
+- Bookmarklets that you can drag straight to your bookmarks bar from the public site
+- Tampermonkey / userscripts for scenarios where a side panel or heavier UI makes sense
+- Documentation, screenshots, and install links so you (or future-you after a device reset) can rehydrate everything fast
+
+## 🛠️ Bookmarklet install
 
 **👉 [Go to installation page](https://jukkan.github.io/power-bookmarklets)**
 
-Drag bookmarklets from that page to your browser's bookmarks bar. Don't use the raw .js files in the repo.
+Drag bookmarklets from that page to your browser's bookmarks bar. Don't use the raw `.js` files in the repo.
 
-## Bookmarklets (just one for now...)
+## Bookmarklets
 
 ### 📋 Get Table Metadata
 
@@ -46,4 +51,19 @@ Extracts Dataverse table schema from a model-driven app view and copies it as a 
 *1-minute demo showing how to extract table schema and use it with AI tools*
 
 **Source:** [`bookmarklets/get-table-metadata.js`](bookmarklets/get-table-metadata.js)
+
+## Tampermonkey scripts
+
+### ⚡ PPAC Known Issues Enhanced
+Side panel experience for the Power Platform Admin Center Known Issues page with filtering, watchlists, keyboard shortcuts, and export.
+
+![PPAC Known Issues Enhanced panel](tampermonkey/Tampermonkey%20PPAC%20known%20issues.png)
+
+**Rapid install (what you need after a clean PC):**
+1. Install the [Tampermonkey](https://www.tampermonkey.net/) extension for your browser.
+2. Open the raw script URL: https://raw.githubusercontent.com/jukkan/power-bookmarklets/main/tampermonkey/ppac-enhanced.user.js
+3. Tampermonkey prompts you to install/update the script. Confirm.
+4. Visit [PPAC Known Issues](https://admin.powerplatform.microsoft.com/support/knownIssues), load any results with the native filters, and use the lightning button to open the panel.
+
+See the full feature list, screenshots, and maintenance notes in [tampermonkey/ppac-enhanced.user.md](tampermonkey/ppac-enhanced.user.md).
 
