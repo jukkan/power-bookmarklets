@@ -52,6 +52,38 @@ Extracts Dataverse table schema from a model-driven app view and copies it as a 
 
 **Source:** [`bookmarklets/get-table-metadata.js`](bookmarklets/get-table-metadata.js)
 
+### ⚡ Get Flow JSON
+
+Extracts Power Automate cloud flow definition from Dataverse and displays it in a rich, formatted viewer. Perfect for analyzing flow structure, sharing with AI tools like Claude or ChatGPT, or creating documentation.
+
+**Usage:**
+1. Navigate to any Power Platform page (maker portal, model-driven app, etc.)
+2. Click the bookmarklet
+3. Enter a Flow ID (GUID) - either the Dataverse ID or Maker Portal ID
+4. Flow definition opens in a new window with formatted viewer
+
+**Key features:**
+- **Recent flows history:** Remembers the last 10 flows you've viewed for quick access
+- **Flow search:** Can search flows by name if ID lookup fails (useful for flows in the Default Solution)
+- **Two export formats:** Full JSON or AI-optimized minimized version
+- **Variable analysis:** Shows all flow variables grouped by type with usage tracking
+- **Trigger details:** Displays trigger type, schedule, table, and event information
+- **Connection references:** Lists all connections used by the flow
+- **Both flow IDs shown:** Displays both Dataverse ID (workflowid) and Maker Portal ID (workflowidunique)
+
+**Screenshot:**
+
+![Get Flow JSON viewer](bookmarklets/Bookmarklet%20Get%20Flow%20JSON.png)
+
+**What it does:**
+- Fetches flow definition using Dataverse Web API `v9.2`
+- Parses the full flow JSON including triggers, actions, variables, and connections
+- Opens a formatted viewer with syntax highlighting
+- Tracks variable usage across all actions
+- Provides AI-optimized export that reduces token count by ~70%
+
+**Source:** [`bookmarklets/get-flow-json.js`](bookmarklets/get-flow-json.js)
+
 ## Tampermonkey scripts
 
 ### ⚡ PPAC Known Issues Enhanced
