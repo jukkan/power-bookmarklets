@@ -20,7 +20,7 @@ Drag bookmarklets from that page to your browser's bookmarks bar. Don't use the 
 Extracts Dataverse table schema from a model-driven app view and copies it as a markdown table. Perfect for pasting into AI tools like Claude, Copilot, or ChatGPT.
 
 **Usage:**  
-1. Navigate to a table view in a model-driven app  
+1. Navigate to a table view in a model-driven app (⚠️**IMPORTANT!** This is where your get the auth.)
 2. Click the bookmarklet  
 3. Schema is copied to clipboard  
 
@@ -57,7 +57,7 @@ Extracts Dataverse table schema from a model-driven app view and copies it as a 
 Extracts Power Automate cloud flow definition from Dataverse and displays it in a rich, formatted viewer. Perfect for analyzing flow structure, sharing with AI tools like Claude or ChatGPT, or creating documentation.
 
 **Usage:**
-1. Navigate to any Power Platform page (maker portal, model-driven app, etc.)
+1. Navigate to a table view in a model-driven app (⚠️**IMPORTANT!** This is where you get the auth.)
 2. Click the bookmarklet
 3. Enter a Flow ID (GUID) - either the Dataverse ID or Maker Portal ID
 4. Flow definition opens in a new window with formatted viewer
