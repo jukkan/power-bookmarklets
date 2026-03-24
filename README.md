@@ -20,7 +20,7 @@ Drag bookmarklets from that page to your browser's bookmarks bar. Don't use the 
 Extracts Dataverse table schema from a model-driven app view and copies it as a markdown table. Perfect for pasting into AI tools like Claude, Copilot, or ChatGPT.
 
 **Usage:**  
-1. Navigate to a table view in a model-driven app  
+1. Navigate to a table view in a model-driven app (⚠️**IMPORTANT!** This is where you get the auth.)  
 2. Click the bookmarklet  
 3. Schema is copied to clipboard  
 
@@ -52,6 +52,38 @@ Extracts Dataverse table schema from a model-driven app view and copies it as a 
 
 **Source:** [`bookmarklets/get-table-metadata.js`](bookmarklets/get-table-metadata.js)
 
+### ⚡ Get Flow JSON
+
+Extracts Power Automate cloud flow definition from Dataverse and displays it in a rich, formatted viewer. Perfect for analyzing flow structure, sharing with AI tools like Claude or ChatGPT, or creating documentation.
+
+**Usage:**
+1. Navigate to a table view in a model-driven app (⚠️**IMPORTANT!** This is where you get the auth.)
+2. Click the bookmarklet
+3. Enter a Flow ID (GUID) — either the Dataverse ID or Maker Portal ID
+4. Flow definition opens in a new window with a formatted viewer
+
+**Key features:**
+- **Recent flows history:** Remembers the last 10 flows you've viewed for quick access
+- **Flow search:** Can search flows by name if ID lookup fails (useful for flows in the Default Solution)
+- **Two export formats:** Full JSON or AI-optimized minimized version
+- **Variable analysis:** Shows all flow variables grouped by type with usage tracking
+- **Trigger details:** Displays trigger type, schedule, table, and event information
+- **Connection references:** Lists all connections used by the flow
+- **Both flow IDs shown:** Displays both Dataverse ID (`workflowid`) and Maker Portal ID (`workflowidunique`)
+
+**Screenshot:**
+
+![Get Flow JSON viewer](bookmarklets/Bookmarklet%20Get%20Flow%20JSON.png)
+
+**What it does:**
+- Fetches flow definition using Dataverse Web API `v9.2`
+- Parses the full flow JSON including triggers, actions, variables, and connections
+- Opens a formatted viewer with syntax highlighting
+- Tracks variable usage across all actions
+- Provides AI-optimized export that reduces token count by ~70%
+
+**Source:** [`bookmarklets/get-flow-json.js`](bookmarklets/get-flow-json.js)
+
 ## Tampermonkey scripts
 
 ### ⚡ PPAC Known Issues Enhanced
@@ -66,4 +98,36 @@ Side panel experience for the Power Platform Admin Center Known Issues page with
 4. Visit [PPAC Known Issues](https://admin.powerplatform.microsoft.com/support/knownIssues), load any results with the native filters, and use the lightning button to open the panel.
 
 See the full feature list, screenshots, and maintenance notes in [tampermonkey/ppac-enhanced.user.md](tampermonkey/ppac-enhanced.user.md).
+
+### 🔬 Power Apps Checker Formula Export
+
+Intercepts Power Apps Studio authoring API traffic while you run the built-in checker. Extracts formula diagnostics (errors and warnings with precise character offsets), the Power Fx source text for every flagged property, performance findings, and accessibility results — then gives you one-click export to three formats optimised for different audiences.
+
+![Power Apps Checker formula export in action](tampermonkey/Power%20Apps%20Checker%20formula%20export%20Tampermonkey.png)
+
+**Why this exists:**  
+The official Power Apps Checker API does not expose formula evaluation results for canvas apps. The Studio runs that evaluation client-side, but the output is never available outside the browser tab. This script fills that gap by tapping the internal `/api/v1/invoke` and `/api/v2/invoke` calls the Studio already makes.
+
+**Key capabilities:**
+- **Semantic formula errors** — type mismatches, missing columns, invalid `Patch` arguments, unrecognised names
+- **Delegation warnings with character offsets** — precisely which characters triggered the warning, not just which screen
+- **Formula source text** — the actual Power Fx script for each flagged property, ready to paste into an AI coding agent prompt
+- **Performance & accessibility** — `InefficientDelayLoading` warnings, accessibility issue groups
+
+**Export formats:**
+
+| Button | Format | Best for |
+|--------|--------|----------|
+| **Copilot** | Compact plain-text | Pasting into GitHub Copilot, Claude Code, or any AI coding agent |
+| **Markdown** | Full structured report | Docs, issue trackers, PR comments |
+| **JSON** | Structured data | Programmatic processing |
+| **Save** | JSON file download | Offline archiving |
+
+**Rapid install (what you need after a clean PC):**
+1. Install the [Tampermonkey](https://www.tampermonkey.net/) extension for your browser.
+2. Open the raw script URL: https://raw.githubusercontent.com/jukkan/power-bookmarklets/main/tampermonkey/Power%20Apps%20Checker%20formula%20export.user.js
+3. Tampermonkey prompts you to install/update the script. Confirm.
+4. Open any canvas app in [Power Apps Studio](https://make.powerapps.com), open the **App Checker / Formulas** panel to trigger a check run, and the export panel appears at the bottom-right.
+
+See the full feature list, console API, and technical notes in [tampermonkey/Power Apps Checker formula export.user.md](tampermonkey/Power%20Apps%20Checker%20formula%20export.user.md).
 
